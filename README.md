@@ -1,6 +1,3 @@
-# Crowd-Surfers-Portfolio
-Snippet and technical breakdown of the elements worked on for the game, Crowd Surfers, made by GDA.
-
 # :roller_skate: Crowd Surfers - My Role as a Tool Engineer and Game AI Programmer
 
 The purpose of this README, is to serve as a means of explaining my contributions to the game, Crowd Surfers, developed by GDA (Game Design & Art Collaboration Club) at UCSC. Due to not owning the repository, and for brevity, here is a technical breakdown, along with the context, organized until I can get a portfolio site up given my allotted time as a student. 
