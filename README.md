@@ -26,6 +26,7 @@ My second role during the second half of development, was a Game AI programmer, 
 - Partial A* with path splicing
 - Spatial Partitioning and Culling
 
+# Technical Breakdown, Struggles, and Planning
 ## Tool
 ### Asset Pipeline
 During one of our early playtests, some programmers were trying to create assets (due to the art pipeline trying to provide sprites, but sadly only right before deadlines), the process was extremely painful. There were around 5 people just watching someone try to suffer converting the size of sprites, scalars, and position alignment, to create a basic building. Taking initiative, I thought, surely there must be a better way to do this which wasn't too difficult to learn, and anyone can pick up. Experimenting, I found Godot's @tool, which allowed a script to run in editor, and influence objects outside of runtime. We could have used blender, but due to the design specifications, and the amount of developers unfamiliar with blender (and others who did know too busy with the main character rigging), we needed a compromise. 
