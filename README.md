@@ -75,3 +75,7 @@ https://github.com/user-attachments/assets/f654bb4b-8b16-40b3-b766-cc44a026aaa2
 <img width="86" height="93" alt="crowd2" src="https://github.com/user-attachments/assets/622415b0-a4f0-4887-b442-acb04964e3be" />
 <img width="240" height="93" alt="crowd3" src="https://github.com/user-attachments/assets/2558105d-1608-41eb-b926-626f495e17f2" />
 <img width="157" height="93" alt="crowd1" src="https://github.com/user-attachments/assets/287cc6c9-e33f-446d-89c0-4c0ea4b9a615" />
+
+
+# Summary
+Looking back, I would have definitely used more programming techniques like builders, templates, and encapsulation, but given the knowledge I had during the time, and having little experience in game engines, it could have gone much worse. Figuring out how best to optimize the code, or even figuring out the right architecture for the crowd was an amazing experience. Moments where someone brought up where my code struggled, and how to improve it, even if I didn't understand it at first, helped point out where I struggled as a programmer. Honestly, I can't wait for the next GDC!
