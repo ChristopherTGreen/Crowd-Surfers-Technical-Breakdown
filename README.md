@@ -1,13 +1,13 @@
 # Crowd-Surfers-Portfolio
 Snippet and technical breakdown of the elements worked on for the game, Crowd Surfers, made by GDA.
 
-# Crowd Surfers - My Role as a Tool Engineer and Game AI Programmer
+# :roller_skate: Crowd Surfers - My Role as a Tool Engineer and Game AI Programmer
 
 The purpose of this README, is to serve as a means of explaining my contributions to the game, Crowd Surfers, developed by GDA (Game Design & Art Collaboration Club) at UCSC. Due to not owning the repository, and for brevity, here is a technical breakdown, along with the context, organized until I can get a portfolio site up given my allotted time as a student. 
 
 Link to the project: https://game-design-art-collab.itch.io/crowd-surfers
 
-## Roles
+## :busts_in_silhouette: Roles
 
 ### Tool Engineer
 My first role during the first half of development and some of the second, was a Tool Engineer. Specifically, I worked on finding out what pipelines were the longest which could be fixed and improved upon efficiently within engine in relation to work between departments. Frequently, I had to communicate and relay requirements and specifications from Design or Programming departments on what was, or was not feasible, to art, for any asset creations. An important lesson I did learn during this time, was not to overthink a problem, and continuously problem solve it for several hours or days straight, led to an interesting case of almost fainting while problem solving tree assets during a work jam session. 
@@ -15,7 +15,7 @@ My first role during the first half of development and some of the second, was a
 ### Game AI Programmer
 My second role during the second half of development, was a Game AI programmer, focusing on the Crowd AI for the game. Because no one had tried making the AI for our game, I ended up in a position where I started out being a sole developer on the initial feature. Later on, once the bones were established, tasks were being completed, and the scale of the system growing, I was able to ask and recruit some more programmers onto the team, helping onboard them and basically work together to implement different features. 
 
-## Quick Breakdown and Overview
+## :memo: Quick Breakdown and Overview
 ### Asset Creation Tool
 - Engineered a meter-based vector system instead of scalar bounds to optimize designer workflows in editor
 - Using linear algebra and vector/matrix transformations for image splicing, placement and hitbox creation
@@ -27,7 +27,7 @@ My second role during the second half of development, was a Game AI programmer, 
 - Spatial Partitioning and Culling
 
 # Technical Breakdown, Struggles, and Planning
-## Tool
+## :wrench: Tool
 ### Asset Pipeline
 During one of our early playtests, some programmers were trying to create assets (due to the art pipeline trying to provide sprites, but sadly only right before deadlines), the process was extremely painful. There were around 5 people just watching someone try to suffer converting the size of sprites, scalars, and position alignment, to create a basic building. Taking initiative, I thought, surely there must be a better way to do this which wasn't too difficult to learn, and anyone can pick up. Experimenting, I found Godot's @tool, which allowed a script to run in editor, and influence objects outside of runtime. We could have used blender, but due to the design specifications, and the amount of developers unfamiliar with blender (and others who did know too busy with the main character rigging), we needed a compromise. 
 
@@ -53,7 +53,7 @@ After
 <img width="84" height="93" alt="after4" src="https://github.com/user-attachments/assets/036abf95-b165-4fb0-95ad-fcff722847e8" />
 <img width="122" height="93" alt="after1" src="https://github.com/user-attachments/assets/7ad40ce6-b1c1-4d48-a4e7-57217e17dd54" />
 
-## Game AI
+## :brain: Game AI
 ### Ideation
 Due to design requirements, and the need for early work on levels, level designers were told the AI would be blob based, or an area which slowed the player down upon entering. In the background, I was curious how possible it was to actually create a more dynamic, more impactful crowd while keeping performance high. Having the opportunity to go to GDC, I attended a Game AI roundtable, and one developer from Sucker Punch, detailed how their AI improved from their first to their second game. They went from individual minded AI to a unified, group brain. Along with dinners with some amazing developers from AAA companies, I started figuring out the crowd system for our game.
 
