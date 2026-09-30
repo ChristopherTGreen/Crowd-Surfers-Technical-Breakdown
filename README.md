@@ -20,7 +20,17 @@ During one of our early playtests, some programmers were trying to create assets
 ### Calculations
 The biggest issue with asset creation, was the fact Godot used mostly scalars, with no dedicated meter system, and if one object in a hierarchy was a different scale to 1.0, every object's scale ended up messed up. Furthermore, the sprite3D ended up scaling based on the sprite's pixel size, resulting in a mess of figuring out a standard for sizes. Later, this caused a massive issue, where the entire map and player was scaled around 16 times the intended size for the engine, resulting in many physics equations being difficult to follow or reaching floating point errors much more easily.
 
-The tool I made, handled the scalars on its own, keeping a meter based system as its root, which considered an objects pixel size, and made the image sit at 1.0 meters, long, wide, and tall. Furthermore, art gives us cut up sprites, for the front of a building, top of a building, or if it was a bus, all sides of the bus. Moving one sprite, means adjusting more, or changing a size means adjusting the rest, and to bypass this, I calculated all the positional alignments and rotational logic required, including stairs, to improve the process of development.
+The tool I made, handled the scalars on its own, keeping a meter based system as its root, which considered an objects pixel size, and made the image sit at 1.0 meters, long, wide, and tall. Furthermore, art gives us cut up sprites, for the front of a building, top of a building, or if it was a bus, all sides of the bus. Moving one sprite, means adjusting more, or changing a size means adjusting the rest, and to bypass this, I calculated all the positional alignments and rotational logic required, including stairs, to improve the process of development. By the end I had probably 20 pages, some are below.
+
+<img width="228" height="305" alt="Calculations1" src="https://github.com/user-attachments/assets/f35caba5-f747-4775-9526-bf3d3b204b0d" />
+<img width="228" height="305" alt="Calculations2" src="https://github.com/user-attachments/assets/75a62f8f-8b42-4c1c-856d-b9fd9eac37c6" />
+
+Later we had to change from an orthogonal, top-down 3D environment emulating 2D, to an orthogonal, 45° 3D environment emulating 2.5D. Switching the tool to accommodate wasn't hard, part of me kind of wished we had just onboarded people to blender for the process, but the benefit of the tool, was that all the toggles needed for any scripts were set automatically for designers, and shaders worked for the sprite3Ds. 
+
+Before V
+<img width="270" height="187" alt="before1" src="https://github.com/user-attachments/assets/90fc1d6e-b530-481d-bdd4-811ae1fce3d5" />
+<img width="213" height="187" alt="before2" src="https://github.com/user-attachments/assets/bb636b3d-d914-4e97-afd1-125c67c578e6" />
+
 
 
 
