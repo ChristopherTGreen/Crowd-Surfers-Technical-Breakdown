@@ -5,6 +5,8 @@ Snippet and technical breakdown of the elements worked on for the game, Crowd Su
 
 The purpose of this README, is to serve as a means of explaining my contributions to the game, Crowd Surfers, developed by GDA (Game Design & Art Collaboration Club) at UCSC. Due to not owning the repository, and for brevity, here is a technical breakdown, along with the context, organized until I can get a portfolio site up given my allotted time as a student. 
 
+Link to the project: https://game-design-art-collab.itch.io/crowd-surfers
+
 ## Roles
 
 ### Tool Engineer
@@ -12,6 +14,17 @@ My first role during the first half of development and some of the second, was a
 
 ### Game AI Programmer
 My second role during the second half of development, was a Game AI programmer, focusing on the Crowd AI for the game. Because no one had tried making the AI for our game, I ended up in a position where I started out being a sole developer on the initial feature. Later on, once the bones were established, tasks were being completed, and the scale of the system growing, I was able to ask and recruit some more programmers onto the team, helping onboard them and basically work together to implement different features. 
+
+## Quick Breakdown and Overview
+### Asset Creation Tool
+- Engineered a meter-based vector system instead of scalar bounds to optimize designer workflows in editor
+- Using linear algebra and vector/matrix transformations for image splicing, placement and hitbox creation
+- Handled data tracking to prevent memory leaks or ghost objects
+### Crowd AI
+- Implemented main-group to sub-group structure for crowds
+- Amortized the merging process
+- Partial A* with path splicing
+- Spatial Partitioning and Culling
 
 ## Tool
 ### Asset Pipeline
@@ -25,44 +38,40 @@ The tool I made, handled the scalars on its own, keeping a meter based system as
 <img width="228" height="305" alt="Calculations1" src="https://github.com/user-attachments/assets/f35caba5-f747-4775-9526-bf3d3b204b0d" />
 <img width="228" height="305" alt="Calculations2" src="https://github.com/user-attachments/assets/75a62f8f-8b42-4c1c-856d-b9fd9eac37c6" />
 
-Later we had to change from an orthogonal, top-down 3D environment emulating 2D, to an orthogonal, 45° 3D environment emulating 2.5D. Switching the tool to accommodate wasn't hard, part of me kind of wished we had just onboarded people to blender for the process, but the benefit of the tool, was that all the toggles needed for any scripts were set automatically for designers, and shaders worked for the sprite3Ds. 
+Looking back at my code, there are a lot of improvements and coding patterns I learned later which I would have applied, because my code was a mess. Later we had to change from an orthogonal, top-down 3D environment emulating 2D, to an orthogonal, 45° 3D environment emulating 2.5D. Switching the tool to accommodate wasn't hard, part of me kind of wished we had just onboarded people to blender for the process, but the benefit of the tool, was that all the toggles needed for any scripts were set automatically for designers, and shaders worked for the sprite3Ds. 
 
-Before V
-<img width="270" height="187" alt="before1" src="https://github.com/user-attachments/assets/90fc1d6e-b530-481d-bdd4-811ae1fce3d5" />
-<img width="213" height="187" alt="before2" src="https://github.com/user-attachments/assets/bb636b3d-d914-4e97-afd1-125c67c578e6" />
+Before
 
+<img width="135" height="93" alt="before1" src="https://github.com/user-attachments/assets/90fc1d6e-b530-481d-bdd4-811ae1fce3d5" />
+<img width="106" height="93" alt="before2" src="https://github.com/user-attachments/assets/bb636b3d-d914-4e97-afd1-125c67c578e6" />
 
+After
 
+<img width="125" height="93" alt="after2" src="https://github.com/user-attachments/assets/9b7c95e1-c127-4656-9516-3fd145f76bfa" />
+<img width="106" height="93" alt="after3" src="https://github.com/user-attachments/assets/9c7f80fb-4774-458a-8f52-2b173287ef38" />
+<img width="84" height="93" alt="after4" src="https://github.com/user-attachments/assets/036abf95-b165-4fb0-95ad-fcff722847e8" />
+<img width="122" height="93" alt="after1" src="https://github.com/user-attachments/assets/7ad40ce6-b1c1-4d48-a4e7-57217e17dd54" />
 
-## Key Systems Built
+## Game AI
+### Ideation
+Due to design requirements, and the need for early work on levels, level designers were told the AI would be blob based, or an area which slowed the player down upon entering. In the background, I was curious how possible it was to actually create a more dynamic, more impactful crowd while keeping performance high. Having the opportunity to go to GDC, I attended a Game AI roundtable, and one developer from Sucker Punch, detailed how their AI improved from their first to their second game. They went from individual minded AI to a unified, group brain. Along with dinners with some amazing developers from AAA companies, I started figuring out the crowd system for our game.
 
-### Player ↔ Bike State System
-- Designed a dual-entity system where control dynamically transfers between player and vehicle
-Managed visibility, physics, and input handling across multiple states
-### Enemy AI (State-Based)
-- Implemented AI behavior using structured states (chase, fire, death)
-Designed positioning logic to maintain optimal combat distance
-Built adaptive targeting (bike vs player depending on state)
-### Combat System
-- Reusable projectile (bullet) system shared across multiple enemy types
-Timer-based firing logic with positional calculations
-### Physics Handling Solution
-- Solved collision issues between player and enemies by dynamically toggling immovability
-Prevented physics conflicts while maintaining gameplay functionality
+### Architecture
+The crowd system works with a main and sub brain structure, where each member of the group, followed a main anchor, one who did not collide with the player, only the world, which was the only rid to have a nav agent attached. The needed velocity was shared to each member, but as a guide. When the player collides with a member of the crowd, not the anchor, they can be removed from the main group, and need to remerge with their crowd. That disconnected member looks for any other members nearby, and forms a subgroup with allocated sub-anchors, which have their own nav agent trying to remerge with the main group. As they move, back, they merge with any other sub groups who are close enough, creating a unique snake effect for crowds moving in dense areas or moving around buildings. 
 
-## Technical Highlights
-- State machine-driven behavior for player, bike, and enemies
-- Reusable systems across multiple entities
-- Real-time physics problem solving and constraint handling
+To further optimize the system, I amortized checking sub groups and members for their positions. For example, a group of 100, the script only checks the 1st 10, then the next 10, and then the next 10, eventually looping at the end. Furthermore, taking an example from StarCraft and Command & Conquer, I cut off the search of the A* algorithm early, instead of finding the best path fully, and only finds a new path when reaching too far away from the next point, or when reaching the end of the current given path. Finally, there is a basic spatial partition system, which checks if the player is close enough to one of their waypoints, to enable the physics and script, or to disable the current main process until later. 
 
-# Running the Project
-To run the project in your local environment, follow either these two steps:
-Quick Method:
-  1) Access the github pages for Blade Cycle
-  2) Click and run the link for the page
+### Late Development Chaos
+5 Days before release, reports of bad performance started reaching me. 2 Days later I checked out the issue, and apparently performance had gotten 4 times as bad, going from roughly 48-60 to 12-15, sometimes lower from what I recall. Apparently, a push was made, built on a separate branch, over the course of time, and it was a physics issue, meaning the profiler was having immense trouble figuring out what the issue was. It was a Find Collision issue, and I only figured it out after a group binary search through the 100 pushes in our GitHub, and noticing it exponentially got worse when multiple crowds collided with each other. Due to bit masking and audio, meant for when the player was near a crowd to play sounds of chatter, the area3Ds, being in (can't remember well) layer 1 or mask 1, the same layer as the world collisions itself, there was a massive issue with the physics engine. Basically, the area3D was not necessarily reading the crowds, but the crowds could read the area3Ds, even though there was no reason for them to read the area3D. Because of 2 area3Ds being detected, it triggered both the broad phase of collision checking for an engine, and the narrow phase, resulting in extensive checking of every single member of a crowd.
 
-Longer Method:
-  1) Clone the repository to your local machine.
-  2) Run VScode.
-  3) Download the live server extension.
-  4) Run the live server on your local machine.
+An example of how many checks were being made, there was a section of the map of around 12 crowds, each with 2 area3Ds, and 65 members roughly. The total checking required would be around 3120 times, but if there was a chance their area check was big enough to hit other crowd groups, they could be checking around 6-24 total areas, instead of 2. Averaging it out, there would be 4680--18720 checks in every collision check. Despite using primitives, the narrow phase of the physics engine still took a beating, resulting in this massive performance lost. A day before release, I managed to repair the issue, and now I often get obsessed with performance or pre-mature optimization because of how bad of an issue this was, but glad it was resolved in time.
+
+### Early Development Footage and Images
+#### Video
+https://github.com/user-attachments/assets/f654bb4b-8b16-40b3-b766-cc44a026aaa2
+
+#### Image
+
+<img width="86" height="93" alt="crowd2" src="https://github.com/user-attachments/assets/622415b0-a4f0-4887-b442-acb04964e3be" />
+<img width="240" height="93" alt="crowd3" src="https://github.com/user-attachments/assets/2558105d-1608-41eb-b926-626f495e17f2" />
+<img width="157" height="93" alt="crowd1" src="https://github.com/user-attachments/assets/287cc6c9-e33f-446d-89c0-4c0ea4b9a615" />
