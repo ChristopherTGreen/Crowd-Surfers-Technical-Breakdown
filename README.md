@@ -1,6 +1,6 @@
 # :roller_skate: Crowd Surfers - Tool Engineer and Game AI Programmer
 
-The purpose of this README, is to serve as a means of explaining my contributions to the game, Crowd Surfers, developed by GDA (Game Design & Art Collaboration Club) at UCSC. Due to not owning the repository, and for brevity, here is a technical breakdown, along with the context, organized until I can get a portfolio site up given my allotted time as a student. 
+The purpose of this README, is to serve as a means of explaining my contributions to the game, Crowd Surfers, developed by GDA (Game Design & Art Collaboration Club) at UCSC. Due to not owning the repository, and for brevity, here is a technical breakdown, along with the context, organized until I can get a portfolio site up given my allotted time as a student. Crowd Surfers is a speedrunning game involving delivering pizzas to customers as quickly as possible.
 
 Link to the project: https://game-design-art-collab.itch.io/crowd-surfers
 
